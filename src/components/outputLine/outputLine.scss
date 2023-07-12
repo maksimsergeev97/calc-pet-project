@@ -1,0 +1,15 @@
+.calc_output {
+    display: block;
+    text-align: right;
+    color: #424242;
+    font-size: 48px;
+    &-black {
+        color: #ffffff;
+    }
+}
+
+@media (max-width: 480px) {
+    .calc_output {
+        font-size: 58px;
+    }
+}

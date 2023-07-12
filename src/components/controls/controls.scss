@@ -1,0 +1,149 @@
+.controls-wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 55px);
+    grid-template-rows: repeat(5, 55px);
+    gap: 15px;
+    justify-content: center;
+    .calc {
+        border-radius: 16px;
+        backdrop-filter: blur(1px);
+        border: none;
+        box-shadow: 0px 0px 9px 0px rgba(255, 255, 255, 0.43) inset;
+        font-size: 32px;
+        cursor: pointer;
+    }
+    .number-wrapper {
+        display: grid;
+        grid-template-columns: repeat(3, 55px);
+        grid-template-rows: repeat(4, 55px);
+        grid-column-start: 1;
+        grid-column-end: 4;
+        grid-row-start: 2;
+        grid-row-end: 6;
+        gap: 15px;
+        z-index: 3;
+        .calc_number_controls {
+            background: linear-gradient(132deg, rgba(202, 238, 255, 0.6) 0%, rgba(255, 255, 255, 0.4) 100%);
+            color: rgb(255, 255, 255);
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &:active {
+                background: linear-gradient(132deg, rgba(255, 255, 255, 0.815) 0%, rgba(255, 255, 255, 0.596) 100%);
+                box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.267);
+            }
+            &-black {
+                background: #303136;
+                color: #29A8FF;
+                box-shadow: none;
+            }
+        } 
+        .zero {
+            grid-column-start: 1;
+            grid-column-end: 3;
+        }
+    }
+
+    .operation-wrapper {
+        display: grid;
+        grid-template-columns: 55px;
+        grid-template-rows: repeat(4, 55px);
+        grid-column-start: 4;
+        grid-column-end: 5;
+        grid-row-start: 1;
+        grid-row-end: 5;
+        gap: 15px;
+        z-index: 2;
+        
+        .calc_operation_controls {
+            color: rgba(0, 153, 255, 0.644);
+            border-radius: 12px;
+            background: linear-gradient(226deg, #d0e8ffab 0%, rgba(29, 146, 255, 0.28) 100%);
+            box-shadow: 0px 0px 9px 0px rgba(255, 255, 255, 0.43) inset;
+            transition: all 0.6s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &-black {
+                color: #339DFF;
+                background: #005DB2;
+                box-shadow: none;
+            }
+            &_active {
+                color: white;
+                background: linear-gradient(226deg, #ffffffab 20%, rgba(0, 195, 255, 0.479) 70%);
+            }
+            &:active {
+                background: linear-gradient(132deg, rgba(139, 199, 255, 0.801) 0%, rgba(178, 215, 250, 0.541) 100%);
+                box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.267);
+            }
+        }
+    }
+
+    .content-state-wrapper {
+        display: grid;
+        grid-template-columns: repeat(4, 55px);
+        grid-template-rows: repeat(5, 55px);
+        grid-column-start: 1;
+        grid-column-end: 5;
+        grid-row-start: 1;
+        grid-row-end: 6;
+        gap: 15px;
+        z-index: 1;
+        .calc_state_controls{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(132deg, rgba(202, 238, 255, 0.6) 0%, rgba(255, 255, 255, 0.4) 100%);
+            color: rgb(116, 200, 255);
+            &-black {
+                background: #616161;
+                color: #A5A5A5;
+                box-shadow: none;
+            }
+            &:active {
+                background: linear-gradient(132deg, rgba(255, 255, 255, 0.801) 0%, rgba(255, 255, 255, 0.541) 100%);
+                box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.267);
+            }
+        }
+        .equal {
+            color: #B2DAFF;
+            background: #19ACFF;
+            box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.801);
+            grid-column-start: 4;
+            grid-column-end: 5;
+            grid-row-start: 5;
+            grid-row-end: 6;
+            &-black {
+                box-shadow: none;
+            }
+        }
+        
+    }
+}
+
+@media (max-width: 480px) {
+   .controls-wrapper {
+        grid-template-columns: repeat(4, 75px);
+        grid-template-rows: repeat(5, 75px);
+        gap: 20px;
+        .number-wrapper {
+            grid-template-columns: repeat(3, 75px);
+            grid-template-rows: repeat(4, 75px);
+            gap: 20px;
+        }
+        .operation-wrapper {
+            grid-template-columns: 75px;
+            grid-template-rows: repeat(4, 75px);
+            gap: 20px;
+       }
+       .content-state-wrapper {
+        grid-template-columns: repeat(4, 75px);
+        grid-template-rows: repeat(5, 75px);
+        gap: 20px;
+       }
+   }
+
+
+}
