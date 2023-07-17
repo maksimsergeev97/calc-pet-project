@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { themeBlack, themeWhite } from '../../actions';
+import { themeBlack, themeWhite } from '../../actions/theme';
 import './switchTheme.scss';
 
 const SwitchTheme = () => {
     const dispatch = useDispatch();
-    const theme = useSelector(store => store.theme)
+    const theme = useSelector(store => store.theme.theme)
 
     const changeTheme = () => {
         if (theme === 'white') {

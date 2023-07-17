@@ -4,33 +4,31 @@ import {
         firstValue, 
         rewriteSecondValue, 
         secondValue, 
-        operation, 
         sum, 
         diff,
         prod,
         div,
-        allClear,
         firstClear,
         secondClear,
+        allValuesClear,
         firstNegative, 
         firstPositive, 
         secondNegative, 
         secondPositive,
         firstProcent,
         secondProcent,
-        onEquals,
-        offEquals
-    } from '../../actions';
+    } from '../../actions/values';
+import { operation, operationClear, onEquals, offEquals } from '../../actions/operations';
 
 import './controls.scss';
 
 const Controls = () => {
     const dispatch = useDispatch();
-    const first = useSelector(store => store.firstValue);
-    const second = useSelector(store => store.secondValue)
-    const operationElem = useSelector(store => store.operation);
-    const equals = useSelector(store => store.equals);
-    const theme = useSelector(store => store.theme);
+    const first = useSelector(state => state.values.firstValue);
+    const second = useSelector(state => state.values.secondValue)
+    const operationElem = useSelector(state => state.operations.operation);
+    const equals = useSelector(state => state.operations.equals);
+    const theme = useSelector(state => state.theme.theme);
 
     const numberElements = ['7','8','9','4','5','6','1','2','3', '0', '.']
     const operationElements = ['+', '-', 'x', '/']
@@ -62,7 +60,8 @@ const Controls = () => {
     const changeStateValues = (value) => {
         switch (value) {
             case 'AC':
-                dispatch(allClear())
+                dispatch(allValuesClear())
+                dispatch(operationClear())
                 break;
             case 'C':
                 clearValues()
@@ -74,9 +73,6 @@ const Controls = () => {
                 procentValue()
                 break;
             case '=':
-                // if (first !== '0' && second !== '0' && !equals) {
-                //     dispatch(onEquals())
-                // }
                 if (!equals) {
                     dispatch(onEquals())
                 }
@@ -144,15 +140,10 @@ const Controls = () => {
         } else {
             dispatch(offEquals())
         }
-        // if (first !== '0') {
-        //     dispatch(operation(value))
-        //     dispatch(secondClear())
-        // } else {
-        //     return
-        // }
         dispatch(operation(value))
         dispatch(secondClear())
     }
+
 
     let contentNumClass = theme === 'black' ? 'calc calc_number_controls calc_number_controls-black' : 'calc calc_number_controls';
     let operationClass = theme === 'black' ? 'calc calc_operation_controls calc_operation_controls-black' : 'calc calc_operation_controls';

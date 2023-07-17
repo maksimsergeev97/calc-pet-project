@@ -8,7 +8,7 @@ import './app.scss';
 
 const App = () => {
 
-    const theme = useSelector(state => state.theme);
+    const theme = useSelector(state => state.theme.theme);
 
     return (
         <div className="app">

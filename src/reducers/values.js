@@ -1,14 +1,9 @@
 const initialState = {
     firstValue: '0',
-    secondValue: '0',
-    operation: {
-        item: null
-    },
-    equals : false,
-    theme : 'white'
+    secondValue: '0'
 }
 
-const reducer = (state = initialState, action) => {
+const values = (state = initialState, action) => {
     switch(action.type) {
         case 'REWRITE_FIRST_VALUE':
             return {
@@ -30,17 +25,25 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 secondValue: state.secondValue + action.payload
             };
-        case 'CHANGE_INTERMEDIATE_VALUE':
+        case 'SUM_VALUES':
             return {
                 ...state,
-                intermediateValue: state.secondValue
+                firstValue: String(Number(state.firstValue) + Number(state.secondValue)),
             };
-        case 'CHANGE_OPERATION':
+        case 'DIFF_VALUES':
             return {
                 ...state,
-                operation: {
-                    item: action.payload
-                }
+                firstValue: String(Number(state.firstValue) - Number(state.secondValue)),
+            };
+        case 'PROD_VALUES':
+            return {
+                ...state,
+                firstValue: String(Number(state.firstValue) * Number(state.secondValue))
+            };
+        case 'DIV_VALUES':
+            return {
+                ...state,
+                firstValue: String(Number(state.firstValue) / Number(state.secondValue))
             };
         case 'SUM_VALUES':
             return {
@@ -62,19 +65,6 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 firstValue: String(Number(state.firstValue) / Number(state.secondValue))
             };
-
-
-
-        case 'ALL_CLEAR':
-            return {
-                ...state,
-                firstValue: '0',
-                secondValue: '0',
-                operation: {
-                    item: null
-                },
-                equals : false
-            }
         case 'CLEAR_FIRST_VALUE':
             return {
                 ...state,
@@ -85,7 +75,12 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 secondValue: '0'
             }
-                    
+        case 'CLEAR_ALL_VALUES':
+            return {
+                ...state,
+                firstValue: '0',
+                secondValue: '0',
+            }
         case 'CHANGE_ON_NEGATIVE_FIRST_VALUE':
             return {
                 ...state,
@@ -116,30 +111,9 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 secondValue: String(Number(state.secondValue) / 100)
             };
-        case 'ON_EQUALS':
-            return {
-                ...state,
-                equals: true
-            };
-        case 'OFF_EQUALS':
-            return {
-                ...state,
-                equals: false
-            };
-        case 'CHANGE_THEME_BLACK':
-            return {
-                ...state,
-                theme: 'black'
-            }
-        case 'CHANGE_THEME_WHITE':
-            return {
-                ...state,
-                theme: 'white'
-            }
-
         default:
             return state;
-    }
+        }
 }
 
-export default reducer;
+export default values;

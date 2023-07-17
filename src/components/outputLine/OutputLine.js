@@ -3,11 +3,11 @@ import './outputLine.scss';
 
 const OutputLine = () => {
 
-    const firstValue = useSelector(state => state.firstValue);
-    const secondValue = useSelector(state => state.secondValue);
-    const equals = useSelector(state => state.equals);
-    const operationElem = useSelector(state => state.operation.item)
-    const theme = useSelector(state => state.theme);
+    const firstValue = useSelector(state => state.values.firstValue);
+    const secondValue = useSelector(state => state.values.secondValue);
+    const equals = useSelector(state => state.operations.equals);
+    const operationElem = useSelector(state => state.operations.operation.item)
+    const theme = useSelector(state => state.theme.theme);
     let outputClass = theme === 'black' ? 'calc_output calc_output-black' : 'calc_output'
 
     if ((secondValue === '0' && operationElem === null) || equals) {
