@@ -1,24 +1,30 @@
 import { useDispatch, useSelector } from 'react-redux';
 import {
-        rewriteFirstValue, 
-        firstValue, 
-        rewriteSecondValue, 
-        secondValue, 
-        sum, 
-        diff,
-        prod,
-        div,
-        firstClear,
-        secondClear,
-        allValuesClear,
-        firstNegative, 
-        firstPositive, 
-        secondNegative, 
-        secondPositive,
-        firstProcent,
-        secondProcent,
-    } from '../../actions/values';
-import { operation, operationClear, onEquals, offEquals } from '../../actions/operations';
+    valuesRewriteFirst,
+    valuesAddFirst,
+    valuesRewriteSecond,
+    valuesAddSecond,
+    valuesSum,
+    valuesDiff,
+    valuesProd,
+    valuesDiv,
+    valuesClearFirst,
+    valuesClearSecond,
+    valuesClearAll,
+    valuesNegativeFirst,
+    valuesNegativeSecond,
+    valuesPositiveFirst,
+    valuesPositiveSecond,
+    valuesProcentFirst,
+    valuesProcentSecond
+} from '../slices/valuesSlice';
+
+import { 
+        operationChange,
+        operationClear,
+        operationEqualOn,
+        operationEqualOff,
+} from '../slices/operationSlice';
 
 import './controls.scss';
 
@@ -40,16 +46,16 @@ const Controls = () => {
         if (second !== '0') {
             switch(operationElem.item) {
                 case '+':
-                    dispatch(sum());
+                    dispatch(valuesSum());
                     break;
                 case '-':
-                    dispatch(diff());
+                    dispatch(valuesDiff());
                     break;
                 case 'x':
-                    dispatch(prod());
+                    dispatch(valuesProd());
                     break;    
                 case '/':
-                    dispatch(div());
+                    dispatch(valuesDiv());
                     break;  
                 default:
                     return operationElem.item
@@ -60,7 +66,7 @@ const Controls = () => {
     const changeStateValues = (value) => {
         switch (value) {
             case 'AC':
-                dispatch(allValuesClear())
+                dispatch(valuesClearAll())
                 dispatch(operationClear())
                 break;
             case 'C':
@@ -74,7 +80,7 @@ const Controls = () => {
                 break;
             case '=':
                 if (!equals) {
-                    dispatch(onEquals())
+                    dispatch(operationEqualOn())
                 }
                 perfomOperation()
                 break;
@@ -85,31 +91,31 @@ const Controls = () => {
 
     const procentValue = () => {
         if(second !== '0' && !equals){
-            dispatch(secondProcent())
+            dispatch(valuesProcentSecond())
         } else {
-            dispatch(firstProcent())
+            dispatch(valuesProcentFirst())
         }
     }
 
     //clear values
     const clearValues = () => {
         if(second !== '0' && !equals){
-            dispatch(secondClear())
+            dispatch(valuesClearSecond())
         } else {
-            dispatch(firstClear())
+            dispatch(valuesClearFirst())
         }
     }
 
     //change values on positive or negative
     const posOrNeg = () => {
         if((second === '0' || equals) && first >= 0) {
-            dispatch(firstNegative())
+            dispatch(valuesNegativeFirst())
         } else if ((second === '0' || equals) && first < 0) {
-            dispatch(firstPositive())
+            dispatch(valuesPositiveFirst())
         } else if (second >= 0) {
-            dispatch(secondNegative()) 
+            dispatch(valuesNegativeSecond()) 
         } else {
-            dispatch(secondPositive())
+            dispatch(valuesPositiveSecond())
         }
     }
 
@@ -118,18 +124,18 @@ const Controls = () => {
             if (value === '.' && regex.test(second)) {
                 return
             } else {
-                dispatch(secondValue(value)) 
+                dispatch(valuesAddSecond(value)) 
             }
 
         } else if ((first === '0' && operationElem.item === null)|| equals) {
-            dispatch(rewriteFirstValue(value))
+            dispatch(valuesRewriteFirst(value))
         } else if ((first !== '0' && operationElem.item !== null && second === '0') || (first === '0' && operationElem.item !== null)) {
-            dispatch(rewriteSecondValue(value))
+            dispatch(valuesRewriteSecond(value))
         } else if (value === '.' && regex.test(first)) {
             return
         } else {
             if(first.length <= 8) {
-                dispatch(firstValue(value))
+                dispatch(valuesAddFirst(value))
             }
         }
     }
@@ -138,10 +144,10 @@ const Controls = () => {
         if (!equals) {
             perfomOperation()
         } else {
-            dispatch(offEquals())
+            dispatch(operationEqualOff())
         }
-        dispatch(operation(value))
-        dispatch(secondClear())
+        dispatch(operationChange(value))
+        dispatch(valuesClearSecond())
     }
 
 

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { themeBlack, themeWhite } from '../../actions/theme';
+import { themeBlack, themeWhite } from '../slices/themeSlice';
 import './switchTheme.scss';
 
 const SwitchTheme = () => {

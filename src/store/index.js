@@ -1,9 +1,11 @@
-import {createStore, combineReducers} from 'redux'
-import values from '../reducers/values';
-import operations from '../reducers/operations';
-import theme from '../reducers/theme';
+import { configureStore } from '@reduxjs/toolkit';
+import values from '../components/slices/valuesSlice';
+import operations from '../components/slices/operationSlice';
+import theme from '../components/slices/themeSlice';
 
-const store = createStore( combineReducers({values, operations, theme}), 
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const store = configureStore({
+  reducer: {values, operations, theme},
+  devTools: process.env.NODE_ENV !== 'production'
+})
 
-  export default store;
+export default store;
